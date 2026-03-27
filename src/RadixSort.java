@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class RadixSort {
-    public List<String> radixSort(String[] s) {
+    public static List<String> radixSort(String[] s) {
         //handles empty array
         if (s == null || s.length == 0){
             return new ArrayList<>();
@@ -24,8 +24,8 @@ public class RadixSort {
             list.add(word);
         }
 
-        //pass every character left to right
-        for (int pos = 0; pos < maxLength; pos++) {
+        //pass every character right to left
+        for (int pos = maxLength; pos >= 0; pos--) {
             //each bucket will hold words sharing same char at pos
             HashMap<Integer, List<String>> buckets = new HashMap<>();
 
@@ -50,7 +50,7 @@ public class RadixSort {
 
             //sort character keys to add buckets back in correct order
             List<Integer> keys = new ArrayList<>(buckets.keySet());
-            keys.remove((-1));
+            keys.remove(Integer.valueOf(-1));
 
 
             for (int i = 0; i < keys.size(); i++) {
@@ -73,5 +73,22 @@ public class RadixSort {
 
         return list;
     }
+        public static void main(String[] args){
+        String[] input = {
+                "google", "gojo", "amazingly", "jogo", "luna", "pup", "solas", "solo", "pupperino", "amaterasu",
+                        "amazon", "puppy", "hydra", "amazonia", "vueltiao"
+        };
 
+
+        List<String> sorted = radixSort(input);
+
+        //print the sorted array
+            for(int i = 0; i < sorted.size(); i++){
+                if(i < sorted.size() - 1){
+                    System.out.print(sorted.get(i) + ",");
+                } else {
+                    System.out.println(sorted.get(i));
+                }
+            }
+        }
     }
